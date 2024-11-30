@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +26,7 @@ public class Spawner : MonoBehaviour
     private void OnGetEnemy(Enemy enemy)
     {
         enemy.transform.position = GetRandomWaypoint().gameObject.transform.position;
+        enemy.ReceivePosition(GetRandomDirection());
     }
 
     private IEnumerator InstantiateEnemy()

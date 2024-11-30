@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -17,5 +15,10 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         transform.Translate(_direction * _speed * Time.deltaTime);
+    }
+
+    public void ReceivePosition(Vector3 direction)
+    {
+        _direction = direction;
     }
 }

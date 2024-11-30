@@ -169,4 +169,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 2077795690996226160, guid: aaa5cdfa08c4fa5428a856ea075eed80, type: 3}
-  _speed: 2
+  _speed: 1

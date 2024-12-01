@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(_direction * _speed * Time.deltaTime);
     }
 
-    public void ReceivePosition(Vector3 direction)
+    public void ReceiveDirection(Vector3 direction)
     {
         _direction = direction;
     }

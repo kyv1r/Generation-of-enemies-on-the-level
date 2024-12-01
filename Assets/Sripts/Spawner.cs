@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -21,7 +20,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(InstantiateEnemy());
+        StartCoroutine(InstantiateEnemies());
     }
 
     public Vector3 GetRandomDirection()
@@ -40,10 +39,10 @@ public class Spawner : MonoBehaviour
     private void OnGetEnemy(Enemy enemy)
     {
         enemy.transform.position = GetRandomWaypoint().gameObject.transform.position;
-        enemy.ReceivePosition(GetRandomDirection());
+        enemy.ReceiveDirection(GetRandomDirection());
     }
 
-    private IEnumerator InstantiateEnemy()
+    private IEnumerator InstantiateEnemies()
     {
         WaitForSeconds repeatRate = new WaitForSeconds(_repeatTime);
 

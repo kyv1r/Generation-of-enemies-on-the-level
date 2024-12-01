@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private List<Waypoint> _waypoints;
     [SerializeField] private Enemy _enemyPrefab;
+    [SerializeField] private float _repeatTime = 1;
 
     private ObjectPool<Enemy> _enemyPool;
 
@@ -23,6 +24,19 @@ public class Spawner : MonoBehaviour
         StartCoroutine(InstantiateEnemy());
     }
 
+    public Vector3 GetRandomDirection()
+    {
+        List<Vector3> directions = new List<Vector3>()
+        {
+            Vector3.forward,
+            Vector3.right,
+            Vector3.left,
+            Vector3.back,
+        };
+
+        return directions[UnityEngine.Random.Range(0, directions.Count)];
+    }
+
     private void OnGetEnemy(Enemy enemy)
     {
         enemy.transform.position = GetRandomWaypoint().gameObject.transform.position;
@@ -31,11 +45,12 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator InstantiateEnemy()
     {
-        while (true)
+        WaitForSeconds repeatRate = new WaitForSeconds(_repeatTime);
+
+        while (enabled)
         {
-            WaitForSeconds _repeatRate = new WaitForSeconds(1);
             _enemyPool.Get();
-            yield return _repeatRate;
+            yield return repeatRate;
         }
     }
 
@@ -44,15 +59,4 @@ public class Spawner : MonoBehaviour
         return _waypoints[UnityEngine.Random.Range(0, _waypoints.Count)];
     }
 
-    public Vector3 GetRandomDirection()
-    {
-        List<Vector3> directions = new List<Vector3>()
-        {
-            Vector3.forward,
-            Vector3.right,
-            Vector3.left,
-        };
-
-        return directions[UnityEngine.Random.Range(0, directions.Count)];
-    }
 }
